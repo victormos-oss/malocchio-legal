@@ -81,12 +81,18 @@
 
         <h2>Какие данные мы получаем</h2>
         <p>
-          Только название и текст вашего собственного сглаза, и только если гравюры не выключены в
-          настройках. Они отправляются на наш сервер (Cloudflare Workers), который рисует по ним картинку и
-          ничего не хранит: ни текст, ни картинку, ни адрес устройства. Имя человека или номер машины, на
-          которые вы накладываете сглаз, на сервер не уходят никогда. Отключить: «Настройки» → «Гравюры к
-          своим сглазам».
+          Если в настройках включён «ИИ для своих сглазов», в Cloudflare Workers AI уходят название и текст
+          вашего собственного сглаза (чтобы нарисовать гравюру) и описание ситуации, если вы просите сочинить
+          сглаз по нему. Cloudflare обрабатывает запрос и не хранит его. Имя человека или номер машины, на
+          которые вы накладываете сглаз, не уходят никуда и никогда.
         </p>
+        <p>
+          Если включена «Анонимная статистика», на наш сервер уходят обезличенные события: наложен сглаз,
+          усилен, отправлен, заведён свой. Каждое событие это имя, время, тема и сила, плюс случайный номер
+          установки, не связанный ни с вами, ни с устройством. Ни имён, ни номеров машин, ни текстов в
+          статистике нет. Мы видим только общие цифры, например какая доля людей отправляет сертификаты.
+        </p>
+        <p>Оба пункта выключаются в «Настройках».</p>
 
         <h2>Что хранится на устройстве</h2>
         <ul>
@@ -133,7 +139,7 @@
         <h2>Связь</h2>
         <p>Вопросы: <a href="mailto:victormos@gmail.com">victormos@gmail.com</a></p>
 
-        <p class="meta">Редакция от 24 сентября 2026 года.</p>
+        <p class="meta">Редакция от 27 сентября 2026 года.</p>
       </section>
 
       <section id="en" hidden>
@@ -145,12 +151,18 @@
 
         <h2>What we receive</h2>
         <p>
-          Only the name and the text of your own curse, and only while engravings are switched on in the
-          settings. They are sent to our server (Cloudflare Workers), which draws a picture from them and
-          keeps nothing: not the text, not the picture, not your device address. The name of the person or
-          the car plate you cast a curse on is never sent. To switch it off: Settings → Engravings for your
-          own curses.
+          If "AI for your own curses" is on in the settings, the name and text of a curse you wrote
+          yourself go to Cloudflare Workers AI (to draw its engraving), and so does the situation you
+          describe if you ask the app to write a curse from it. Cloudflare processes the request and does
+          not keep it. The name of the person or the car plate you cast a curse on never leaves your device.
         </p>
+        <p>
+          If "Anonymous statistics" is on, anonymous events go to our server: a curse was cast, made worse,
+          sent, a curse of your own was added. Each event is a name, a time, a theme and a level, plus a
+          random install number tied neither to you nor to your device. There are no names, plates or texts
+          in the statistics. We only see totals, such as what share of people send certificates.
+        </p>
+        <p>Both can be switched off in Settings.</p>
 
         <h2>What stays on your device</h2>
         <ul>
@@ -198,7 +210,7 @@
         <h2>Contact</h2>
         <p>Questions: <a href="mailto:victormos@gmail.com">victormos@gmail.com</a></p>
 
-        <p class="meta">Revision of 24 September 2026.</p>
+        <p class="meta">Revision of 27 September 2026.</p>
       </section>
 
       <section id="es" hidden>
@@ -211,12 +223,19 @@
 
         <h2>Qué recibimos</h2>
         <p>
-          Solo el nombre y el texto de tu propio mal, y solo mientras los grabados estén activados en los
-          ajustes. Se envían a nuestro servidor (Cloudflare Workers), que dibuja una imagen con ellos y no
-          guarda nada: ni el texto, ni la imagen, ni la dirección de tu dispositivo. El nombre de la persona
-          o la matrícula a la que echas el mal no se envían nunca. Para desactivarlo: Ajustes → Grabados
-          para tus males.
+          Si en los ajustes está activada «IA para tus males», el nombre y el texto de un mal escrito por ti
+          se envían a Cloudflare Workers AI (para dibujar su grabado), y también la situación que cuentes si
+          pides que la app escriba un mal a partir de ella. Cloudflare procesa la petición y no la guarda.
+          El nombre de la persona o la matrícula a la que echas el mal no salen nunca de tu dispositivo.
         </p>
+        <p>
+          Si está activada la «Estadística anónima», a nuestro servidor llegan eventos anónimos: se echó un
+          mal, se agravó, se envió, se añadió uno propio. Cada evento es un nombre, una hora, un tema y un
+          nivel, más un número de instalación aleatorio que no está ligado ni a ti ni a tu dispositivo. En la
+          estadística no hay nombres, matrículas ni textos. Solo vemos totales, como qué parte de la gente
+          envía certificados.
+        </p>
+        <p>Las dos cosas se desactivan en Ajustes.</p>
 
         <h2>Qué se guarda en tu dispositivo</h2>
         <ul>
@@ -264,7 +283,7 @@
         <h2>Contacto</h2>
         <p>Preguntas: <a href="mailto:victormos@gmail.com">victormos@gmail.com</a></p>
 
-        <p class="meta">Revisión del 24 de septiembre de 2026.</p>
+        <p class="meta">Revisión del 27 de septiembre de 2026.</p>
       </section>
     </main>
 
