@@ -92,6 +92,15 @@
       a.secondary { border: 1px solid var(--brass); color: var(--brass); }
       a.button:focus-visible { outline: 2px solid var(--ash); outline-offset: 3px; }
       .note { margin: 1.25rem 0 0; font-size: 0.8rem; color: var(--ash-dim); }
+      .hint {
+        margin: 1rem 0 0;
+        padding: 0.75rem;
+        border: 1px solid var(--brass-dim);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: var(--ash);
+      }
+      .hint[hidden] { display: none; }
       .missing .curse { display: none; }
     </style>
   </head>
@@ -108,6 +117,7 @@
         <a class="button primary" id="reflect" href="#"></a>
         <a class="button secondary" id="install" href="#"></a>
       </div>
+      <p class="hint" id="hint" role="status" aria-live="polite" hidden></p>
       <p class="note" id="note"></p>
     </main>
 
@@ -123,6 +133,8 @@
           install: 'Установить Malocchio',
           note: 'Шутка. Никакой магии здесь нет. Отразить можно в приложении: оно бесплатное.',
           unknown: 'Сглаз из новой версии приложения. Откройте Malocchio, чтобы его увидеть.',
+          desktop: 'Отразить можно только в приложении на iPhone. Откройте эту ссылку на телефоне.',
+          missing: 'Приложение не открылось. Похоже, Malocchio ещё не установлен: поставьте его и нажмите «Отразить» снова.',
         },
         en: {
           kicker: 'You have been cursed',
@@ -132,6 +144,8 @@
           install: 'Get Malocchio',
           note: 'A joke. There is no magic here. You can send it back in the app, it is free.',
           unknown: 'This curse comes from a newer version of the app. Open Malocchio to see it.',
+          desktop: 'You can only send it back from the app on an iPhone. Open this link on your phone.',
+          missing: 'The app did not open. Malocchio is probably not installed yet: get it and tap the button again.',
         },
         es: {
           kicker: 'Te han echado un mal de ojo',
@@ -141,6 +155,8 @@
           install: 'Instalar Malocchio',
           note: 'Es una broma. Aquí no hay magia. Puedes devolverlo en la app, es gratis.',
           unknown: 'Este mal viene de una versión más nueva de la app. Abre Malocchio para verlo.',
+          desktop: 'Solo se puede devolver desde la app en un iPhone. Abre este enlace en el móvil.',
+          missing: 'La app no se ha abierto. Parece que Malocchio aún no está instalado: instálalo y vuelve a pulsar.',
         },
       }
       const POWERS = ['harmless', 'annoying', 'nasty', 'harsh', 'apocalyptic']
@@ -181,7 +197,35 @@
       set('note', title ? words.note : words.unknown)
       if (!title) document.getElementById('card').classList.add('missing')
 
-      document.getElementById('reflect').href = 'malocchio://reflect?' + params.toString()
+      const reflectLink = document.getElementById('reflect')
+      reflectLink.href = 'malocchio://reflect?' + params.toString()
+
+      // malocchio:// открывает только iPhone с приложением. На компьютере и
+      // Android кнопка молча ничего не делала, и это выглядело поломкой. Теперь
+      // страница говорит, что делать. На iPhone без приложения браузер тоже
+      // молчит: если через две секунды страница всё ещё на экране, значит
+      // приложение не открылось, и подсказка ведёт к установке.
+      const hint = document.getElementById('hint')
+      const showHint = (text) => {
+        hint.textContent = text
+        hint.hidden = false
+      }
+      const isIPhone = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
+      reflectLink.addEventListener('click', (event) => {
+        if (!isIPhone) {
+          event.preventDefault()
+          showHint(words.desktop)
+          return
+        }
+        const timer = setTimeout(() => {
+          if (!document.hidden) showHint(words.missing)
+        }, 2000)
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) clearTimeout(timer)
+        }, { once: true })
+      })
       document.getElementById('install').href = DATA.install
     </script>
   </body>
