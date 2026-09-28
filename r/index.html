@@ -133,7 +133,7 @@
           install: 'Установить Malocchio',
           note: 'Шутка. Никакой магии здесь нет. Отразить можно в приложении: оно бесплатное.',
           unknown: 'Сглаз из новой версии приложения. Откройте Malocchio, чтобы его увидеть.',
-          desktop: 'Отразить можно только в приложении на iPhone. Откройте эту ссылку на телефоне.',
+          desktop: 'Отразить можно только в приложении на телефоне. Откройте эту ссылку на нём.',
           missing: 'Приложение не открылось. Похоже, Malocchio ещё не установлен: поставьте его и нажмите «Отразить» снова.',
         },
         en: {
@@ -144,7 +144,7 @@
           install: 'Get Malocchio',
           note: 'A joke. There is no magic here. You can send it back in the app, it is free.',
           unknown: 'This curse comes from a newer version of the app. Open Malocchio to see it.',
-          desktop: 'You can only send it back from the app on an iPhone. Open this link on your phone.',
+          desktop: 'You can only send it back from the app on a phone. Open this link there.',
           missing: 'The app did not open. Malocchio is probably not installed yet: get it and tap the button again.',
         },
         es: {
@@ -155,7 +155,7 @@
           install: 'Instalar Malocchio',
           note: 'Es una broma. Aquí no hay magia. Puedes devolverlo en la app, es gratis.',
           unknown: 'Este mal viene de una versión más nueva de la app. Abre Malocchio para verlo.',
-          desktop: 'Solo se puede devolver desde la app en un iPhone. Abre este enlace en el móvil.',
+          desktop: 'Solo se puede devolver desde la app en el móvil. Abre este enlace allí.',
           missing: 'La app no se ha abierto. Parece que Malocchio aún no está instalado: instálalo y vuelve a pulsar.',
         },
       }
@@ -210,11 +210,12 @@
         hint.textContent = text
         hint.hidden = false
       }
-      const isIPhone = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      // Приложение есть на iPhone и на Android (APK), там кнопка его открывает.
+      const isPhone = /iPhone|iPad|iPod|Android/.test(navigator.userAgent) ||
         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 
       reflectLink.addEventListener('click', (event) => {
-        if (!isIPhone) {
+        if (!isPhone) {
           event.preventDefault()
           showHint(words.desktop)
           return
